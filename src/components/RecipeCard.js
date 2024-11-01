@@ -4,12 +4,12 @@ import Link from 'next/link';
 
 const RecipeCard = ({ recipe }) => {
     return (
-        <div className='recipe-card'>
-            <Link href={`/recipes/${recipe.id}`}>
+        <Link href={`/recipes/${recipe.id}`} className="recipe-card">
+            <div>
                 <Image src={recipe.image} alt={recipe.title} width={200} height={150} />
                 <h2>{recipe.title}</h2>
-            </Link>
-        </div>
+            </div>
+        </Link>
     );
 };
 
