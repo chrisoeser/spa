@@ -9,29 +9,29 @@ import Switch from 'react-switch';
 const RecipeList = () => {
     const [searchTerm, setSearchTerm] = useState("");
     const [isFocused, setIsFocused] = useState(false);
-    const [darkMode, setDarkMode] = useState(() => {
-        // Retrieve the dark mode state from local storage, default to false
-        if (typeof window !== 'undefined') {
-            const savedDarkMode = localStorage.getItem('darkMode');
-            return savedDarkMode === 'true';
-        }
-        return false;
-    });
-
+    const [darkMode, setDarkMode] = useState(false); // Default to false
+    const [isMounted, setIsMounted] = useState(false); // Track component mount state
     const [showBackToTop, setShowBackToTop] = useState(false);
 
-    // Update body class and save dark mode state to local storage
+    // Effect to handle dark mode from localStorage after component mounts
     useEffect(() => {
-        document.body.classList.toggle('dark-mode', darkMode);
-        if (typeof window !== 'undefined') {
+        const savedDarkMode = localStorage.getItem('darkMode');
+        if (savedDarkMode !== null) {
+            setDarkMode(savedDarkMode === 'true');
+        }
+        setIsMounted(true);
+    }, []);
+
+    // Update body class and save dark mode state
+    useEffect(() => {
+        if (isMounted) { // Runs after the component has mounted
+            document.body.classList.toggle('dark-mode', darkMode);
             localStorage.setItem('darkMode', darkMode);
         }
-    }, [darkMode]);
-
+    }, [darkMode, isMounted]);
 
     useEffect(() => {
         const handleScroll = () => {
-            console.log('Scroll Y:', window.scrollY); // Log scroll position
             setShowBackToTop(window.scrollY > 200);
         };
         window.addEventListener('scroll', handleScroll);
@@ -76,12 +76,6 @@ const RecipeList = () => {
                         className="dark-mode-toggle"
                         uncheckedIcon={<div className="icon-container"><FaSun className="toggle-icon sun" /></div>}
                         checkedIcon={<div className="icon-container"><FaMoon className="toggle-icon moon" /></div>}
-                        handleStyle={{
-                            backgroundColor: darkMode ? '#333' : '#fff',
-                            border: darkMode ? '2px solid #a0c4ff' : '2px solid #f8d32d',
-                            boxShadow: '0 0 6px rgba(0, 0, 0, 0.2)',
-                            transition: 'background-color 0.3s ease, border 0.3s ease',
-                        }}
                     />
                 )}
             </div>
