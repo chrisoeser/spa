@@ -18,7 +18,7 @@ export default function RecipeDetailsPage() {
             </div>
 
             <button onClick={() => router.push('/')} className='back-button'>
-                <FaArrowLeft className="icon" /> Back to Recipes
+                <FaArrowLeft className="icon" /> Recipe Book
             </button>
 
             <img src={recipe.image} alt={recipe.title}  style={{ width: '300px', height: 'auto' }}/>
