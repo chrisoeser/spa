@@ -232,7 +232,7 @@ body {
 .toggle-icon {
   color: #fff;
   font-size: 1em;
-  transition: transform 0.2s ease-in-out;
+  transition: transform 0.3s ease-in-out;
 }
 
 .sun {
@@ -257,6 +257,59 @@ body {
   border-radius: 50%;
   transition: all 0.3s ease;
   box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+
+.backToTopBtn {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 15px;
+  width: 60px;
+  height: 60px;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  border: 1.3px solid var(--border-color);
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0px 6px 12px var(--shadow-color);
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.backToTopBtn.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.backToTopBtn:hover .icon {
+  animation: growShrinkPoint 0.8s infinite;
+}
+
+.icon {
+  font-size: 1.1rem;
+  transition: transform 0.3s ease;
+}
+
+@keyframes growShrinkPoint {
+  0%, 100% {
+    transform: translateY(0) scale(1); /* Original position and size */
+  }
+  25% {
+    transform: translateY(-2px) scale(1.1); /* Pointing up and grow */
+  }
+  50% {
+    transform: translateY(0) scale(1); /* Back to normal position */
+  }
+  75% {
+    transform: translateY(7px) scale(0.9); /* Pointing down and shrink */
+  }
 }
 
 

@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import RecipeCard from './RecipeCard';
 import recipes from '@/data/recipes';
-import { FaSearch, FaTimes, FaSun, FaMoon } from 'react-icons/fa';
+import { FaSearch, FaTimes, FaSun, FaMoon, FaArrowUp } from 'react-icons/fa';
 import Switch from 'react-switch';
 
 const RecipeList = () => {
@@ -18,7 +18,9 @@ const RecipeList = () => {
         return false;
     });
 
-    // Effect to update body class and save dark mode state to local storage
+    const [showBackToTop, setShowBackToTop] = useState(false);
+
+    // Update body class and save dark mode state to local storage
     useEffect(() => {
         document.body.classList.toggle('dark-mode', darkMode);
         if (typeof window !== 'undefined') {
@@ -26,13 +28,24 @@ const RecipeList = () => {
         }
     }, [darkMode]);
 
+
+    useEffect(() => {
+        const handleScroll = () => {
+            console.log('Scroll Y:', window.scrollY); // Log scroll position
+            setShowBackToTop(window.scrollY > 200);
+        };
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
+    const scrollToTop = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
     const handleFocus = () => setIsFocused(true);
     const handleBlur = () => setIsFocused(false);
     const handleClearSearch = () => setSearchTerm("");
-
-    const handleToggle = (checked) => {
-        setDarkMode(checked);
-    };
+    const handleToggle = (checked) => setDarkMode(checked);
 
     const filteredRecipes = recipes.filter((recipe) =>
         recipe.title.toLowerCase().includes(searchTerm.toLowerCase())
@@ -47,31 +60,22 @@ const RecipeList = () => {
                     placeholder="Search recipes"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className='search-input'
+                    className="search-input"
                     onFocus={handleFocus}
                     onBlur={handleBlur}
                 />
                 {searchTerm && (
                     <FaTimes onClick={handleClearSearch} className="clear-icon" />
                 )}
-                {/* Render the toggle only when the search input is empty */}
                 {!searchTerm && (
                     <Switch
                         checked={darkMode}
                         onChange={handleToggle}
                         onColor='#1c1c1c'
                         offColor='#f0f0f0'
-                        className='dark-mode-toggle'
-                        uncheckedIcon={
-                            <div className='icon-container'>
-                                <FaSun className='toggle-icon sun' />
-                            </div>
-                        }
-                        checkedIcon={
-                            <div className='icon-container'>
-                                <FaMoon className='toggle-icon moon' />
-                            </div>
-                        }
+                        className="dark-mode-toggle"
+                        uncheckedIcon={<div className="icon-container"><FaSun className="toggle-icon sun" /></div>}
+                        checkedIcon={<div className="icon-container"><FaMoon className="toggle-icon moon" /></div>}
                         handleStyle={{
                             backgroundColor: darkMode ? '#333' : '#fff',
                             border: darkMode ? '2px solid #a0c4ff' : '2px solid #f8d32d',
@@ -87,6 +91,13 @@ const RecipeList = () => {
                     <RecipeCard key={recipe.id} recipe={recipe} />
                 ))}
             </div>
+
+            {showBackToTop && (
+                <button className={`backToTopBtn ${showBackToTop ? 'show' : ''}`} onClick={scrollToTop}>
+                    <FaArrowUp className='icon' />
+                </button>
+            )}
+
         </div>
     );
 };
