@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Recipe Book Project
 
-## Getting Started
+## Introduction
 
-First, run the development server:
+The Recipe Book Project is a simple Single Page Application (SPA) built with Next.js and React. This application allows users to browse a collection of recipes, view detailed information about each recipe, and search for specific items. It is designed to be responsive, ensuring a seamless experience on both desktop and mobile devices.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Home Page**: Displays a list of recipes with image and title.
+- **Detail Page**: Clicking on a recipe will navigate to a detailed page with more information about the selected recipe.
+- **Search Functionality**: Users can filter the recipe list based on their input to find specific recipes quickly.
+- **DarkMode Toogle**: Users can switch between light and dark modes, saving the preference in local memory.
+- **Responsive Design**: The application is designed to work well on various screen sizes, providing an optimal user experience on both desktop and mobile devices.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Technologies Used
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Frontend Framework**: Next.js
+- **Component Library**: React
+- **Styling**: CSS Modules (or styled-components)
+- **Data Handling**: Static JSON data
+- **Deployment**: Vercel
 
-## Learn More
+## Running the Project Locally
 
-To learn more about Next.js, take a look at the following resources:
+To run this project locally, follow these steps:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Clone the repository: `https://github.com/chrisoeser/spa`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+2. Navigate into the project directory, install the necessary dependencies, start the development server:
+    ```
+    cd spa
+    npm install
+    npm run dev
+    ```
 
-## Deploy on Vercel
+5. Open your browser and navigate to: `http://localhost:3000`
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Live Application
+Live Vercel application link: `https://spa-jade-ten.vercel.app/`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Challenges Faced
+During the development of this project, I encountered a few challenges, including:
+
+- State Management: Implementing effective state management for darkmode functionality and maintaining state across components.
+- Responsive Design: Ensuring that the application looks good on both desktop and mobile devices required careful planning of CSS styles and thorough testing.
+
+## Conclusion
+The Recipe Book is a comprehensive exercise in building a responsive SPA using modern web technologies. It meets all specified requirements and provides a user-friendly experience.
