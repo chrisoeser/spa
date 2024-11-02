@@ -1,12 +1,12 @@
-"use client";
 import React from 'react';
-import { useParams, useRouter } from 'next/navigation';
-import recipes from '../../../data/recipes.js';
+import { useRouter } from 'next/router';
+import recipes from '../../data/recipes';
 import { FaArrowLeft } from 'react-icons/fa';
 
 export default function RecipeDetailsPage() {
-    const { id } = useParams();
     const router = useRouter();
+    const { id } = router.query;  // Use router.query to get the `id` parameter in the Pages Router.
+    
     const recipe = recipes.find((r) => r.id === parseInt(id));
 
     if (!recipe) return <p>Recipe not found!</p>;
@@ -21,7 +21,7 @@ export default function RecipeDetailsPage() {
                 <FaArrowLeft className="icon" /> Recipe Book
             </button>
 
-            <img src={recipe.image} alt={recipe.title}  style={{ width: '300px', height: 'auto' }}/>
+            <img src={recipe.image} alt={recipe.title} style={{ width: '300px', height: 'auto' }} />
             
             <h2>Ingredients</h2>
             <ul>
@@ -32,7 +32,6 @@ export default function RecipeDetailsPage() {
 
             <h2>Instructions</h2>
             <p>{recipe.instructions}</p>
-            
         </div>
     );
 }
